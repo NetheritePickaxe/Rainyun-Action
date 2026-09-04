@@ -146,6 +146,12 @@ jobs:
           MAX_WORKERS: "2"
           # 最大重试次数（默认1）
           MAX_RETRIES: "1"
+          # 是否在消息推送中显示积分（默认 true）
+          SHOW_POINTS: "true"
+          # 是否在消息推送中显示积分换算人民币（2000积分=1元，默认 false）
+          SHOW_POINTS_YUAN: "true"
+          # 是否在消息推送中显示距满 60000 积分的剩余天数（每日签到 500 积分，默认 false）
+          SHOW_DAYS_TO_TARGET: "true"
       
       - name: 保存Cookie缓存
         uses: actions/cache/save@v3

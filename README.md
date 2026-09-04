@@ -137,6 +137,9 @@ DEBUG=false
 HEADLESS=false
 MAX_WORKERS=2
 MAX_RETRIES=1
+SHOW_POINTS=true
+SHOW_POINTS_YUAN=false
+SHOW_DAYS_TO_TARGET=false
 ```
 
 多账户配置：
@@ -152,6 +155,9 @@ DEBUG=false
 HEADLESS=false
 MAX_WORKERS=2
 MAX_RETRIES=1
+SHOW_POINTS=true
+SHOW_POINTS_YUAN=false
+SHOW_DAYS_TO_TARGET=false
 ```
 
 ### 使用 GitHub Actions 自动签到
@@ -202,6 +208,9 @@ MAX_RETRIES=1
 | MAX_RETRIES | 最大重试次数 | 1 | ❌ |
 | GITHUB_ACTIONS | 在 GitHub Actions 环境中自动设置为 true，用于强制无头模式 | false | ❌ |
 | NOTIFY_ONLY_FAILURE | 仅在有失败账号时推送通知（true/false） | false | ❌ |
+| SHOW_POINTS | 是否在消息推送中显示积分（true/false） | true | ❌ |
+| SHOW_POINTS_YUAN | 是否在消息推送中显示积分换算人民币（true/false，2000积分=1元） | false | ❌ |
+| SHOW_DAYS_TO_TARGET | 是否在消息推送中显示距满 60000 积分的剩余天数（每日签到 500 积分，true/false） | false | ❌ |
 
 ### 关键设置
 

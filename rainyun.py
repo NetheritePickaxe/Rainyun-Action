@@ -8,6 +8,7 @@ import json
 import hashlib
 import re
 import subprocess
+import math
 from datetime import datetime, timedelta
 
 selenium_modules = None
@@ -793,6 +794,9 @@ def run_all_accounts():
     
     failed_count = len(accounts) - success_count
     notify_only_failure = os.getenv("NOTIFY_ONLY_FAILURE", "false").lower() == "true"
+    show_points = os.getenv("SHOW_POINTS", "true").lower() == "true"
+    show_points_yuan = os.getenv("SHOW_POINTS_YUAN", "false").lower() == "true"
+    show_days_to_target = os.getenv("SHOW_DAYS_TO_TARGET", "false").lower() == "true"
     
     if accounts:
         if notify_only_failure and failed_count == 0:
@@ -808,7 +812,18 @@ def run_all_accounts():
                 for i, result in enumerate(final_results, 1):
                     if result:
                         if result['status']:
-                            notification_content += f"\n{i}. {result['username']}: ✅ 成功 - 积分 {result['points']}"
+                            info_parts = []
+                            if show_points:
+                                info_parts.append(f"积分 {result['points']}")
+                            if show_points_yuan:
+                                info_parts.append(f"约 {result['points'] / 2000:.2f} 元")
+                            if show_days_to_target:
+                                remaining = 60000 - result['points']
+                                if remaining > 0:
+                                    days = math.ceil(remaining / 500)
+                                    info_parts.append(f"还需 {days} 天")
+                            info = " - ".join(info_parts)
+                            notification_content += f"\n{i}. {result['username']}: ✅ 成功" + (f" - {info}" if info else "")
                         else:
                             notification_content += f"\n{i}. {result['username']}: ❌ 失败 - {result['msg']}"
                 
